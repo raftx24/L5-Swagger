@@ -29,7 +29,13 @@ class Generator
             }
 
             if (config('l5-swagger.paths.base') !== null) {
-                $swagger->basePath = config('l5-swagger.paths.base');
+                if (config('l5-swagger.swagger_version') === '3.0') {
+                    if (version_compare(config('l5-swagger.swagger_version'), '3.0', '>=')) {
+                        $swagger->servers = [
+                            new Server(['url' => config('l5-swagger.paths.base')]),
+                        ];
+                    }
+                }
             }
 
             $filename = $docDir.'/'.config('l5-swagger.paths.docs_json', 'api-docs.json');
