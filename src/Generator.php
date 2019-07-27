@@ -4,6 +4,7 @@ namespace L5Swagger;
 
 use File;
 use Config;
+use OpenApi\Annotations\Server;
 
 class Generator
 {
